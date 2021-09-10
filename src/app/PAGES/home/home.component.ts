@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/SERVICES/api.service';
-
+import { FeaturedProductsService } from 'src/app/SERVICES/featured-products.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,18 +7,25 @@ import { ApiService } from 'src/app/SERVICES/api.service';
 })
 export class HomeComponent implements OnInit {
 
-  items: any[] | undefined;
-
-  constructor(private api:ApiService) { }
+  items: any[] =[];
+  
+  constructor(private api:FeaturedProductsService) { }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.api.getFeaturedProducts().subscribe(
+      res => this.items = res.products,
+      error => console.log(error)
+    )
   }
 
-  getProducts(){
-    this.api.getJson().subscribe(resp=>{
-      this.items = resp
-    })
+  // getProducts(){
+  //   this.api.getJson().subscribe(resp=>{
+  //     this.items = resp
+  //   })
+  // }
+
+  featuredProducts(){
+    console.log(this.api.getFeaturedProducts())
   }
 
 

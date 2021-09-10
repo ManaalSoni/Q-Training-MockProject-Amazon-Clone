@@ -1,7 +1,7 @@
 <div class="checkout_products">
     <p class="price">Price</p>
     <div class="checkout_product" *ngFor="let p of checkout_products">
-       <img src="{{p.image}}" alt="" class="checkout_product_img">
+       <img [src]="'http://localhost:3000/uploads/'+p.image" alt="" class="checkout_product_img">
        <div class="checkout_product_info">
            
            <p class="checkout_product_title">
@@ -12,7 +12,7 @@
            <p class="checkout_product_in_stock">In Stock</p>
           <div class="checkout_product_gift">
              
-              <input type="checkbox">
+              <input type="checkbox" style="width:10px">
               <p>This is a gift</p>
               <a routerLink="/" class="checkout_product_more"> Learn more</a>
           </div>
@@ -21,6 +21,7 @@
 
        
               </div>
+              <input type="number" style="width: 50px;">
               <a (click)="removeItem(p)"> Delete</a>
               <a href="#">Save for later</a>
               <a href="#">Compare with similar items</a>

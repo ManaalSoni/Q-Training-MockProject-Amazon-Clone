@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CouponsService } from '../../SERVICES/coupons.service';
 
 @Component({
   selector: 'app-add-coupon',
@@ -10,7 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddCouponComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private fireAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(private fb: FormBuilder, private couponsService: CouponsService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -24,24 +24,29 @@ export class AddCouponComponent implements OnInit {
   get coupon() {
     return this.addCouponForm.get("coupon");
   }
+  get discountRate() {
+    return this.addCouponForm.get("discountRate");
+  }
   get description() {
     return this.addCouponForm.get("description");
   }
 
   async addCoupon() {
-    if(this.coupon?.valid && this.description?.valid) {
-      const user = await this.fireAuth.currentUser;
+    if(this.coupon?.valid && this.discountRate?.hasError && this.discountRate.value && this.discountRate.value<101 && this.description?.valid) {
       try {
         const {coupon, discountRate, description} = this.addCouponForm.value;
-        console.log(this.addCouponForm.value);
-        await this.db.collection("coupons").doc(user?.uid).set({
-          coupon,
-          discountRate,
-          description,
-          email: user?.email
-        });
-        console.log("Coupon added successfully");
-        
+        const data = {
+          code: coupon,
+          discount_rate: discountRate,
+          description
+        };
+        this.couponsService.addCoupon(data).subscribe(
+          res => {
+            console.log(res);
+            this.addCouponForm.reset();
+          },
+          error => console.log(error)
+        );
       } catch (error) {
         console.log(error); 
       }
@@ -49,5 +54,9 @@ export class AddCouponComponent implements OnInit {
     } else {
       alert("Details are invalid");
     }
+  }
+
+  navigate() {
+    this.router.navigate(["/home"]);
   }
 }

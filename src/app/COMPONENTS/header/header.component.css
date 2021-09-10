@@ -6,12 +6,12 @@
 
 .header_top{
     background-color: #0F1111;
-    height: 60px;
+    height: 75px;
     font-size: 14px;
     display: flex;
     color: white;
     padding-right: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 5px;
 }
 
 .header_menu{
@@ -26,7 +26,8 @@
 
 .header_menu_icon > mat-icon{
     font-size: 30px;
-    align-items: center;
+    margin-right: 15px;
+
 }
 
 .header_menu_searchbar{
@@ -38,8 +39,8 @@
 } 
 
 .header_menu_input{
-    height: 20px;
-    padding: 10px;
+    /* height: 20px; */
+    padding: 5px;
     border: none;
     width: 100%;
 }
@@ -70,7 +71,7 @@
 .header_menu_logo{
     object-fit: contain;
     width: 100px;
-    margin: 12px 20px 0px 2px;
+    margin: 10px 2px 0px 2px;
 }
 
 .header_menu_singin{
@@ -90,25 +91,32 @@
 
 .header_menu_cart{
     display: flex;
-    margin-top: 10px;
-    margin-left: 8px;
-    height: 50px;
+    /* margin-top: 10px; */
+    /* margin-left: 8px; */
+    height: 45px;
     justify-content: space-around;
+    align-items: center;
 }
 
 .header_cart_number{
     color: #febd69;
     font-size: 25px;
     font-weight: 800;
-    margin-top: -3px;
+    margin-bottom: 1px;
 }
 
 .header_bottom{
-    height: 49px;
+    height: 40px;
     background-image: none;
     background-color: #232f3e;
-    padding-left: 8px;
-    font-size: 12px;
+}
+
+.bottom_content{
+    padding: 6px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    width: 100%;
 }
 
 .header_bottom_location_text{
@@ -122,4 +130,27 @@
 }
 .header_left_line_one{
     font-size: 10px;
+}
+
+.bottom_text{
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    border: 2px solid white;
+    border-radius: 4px;
+}
+a{
+    margin-left: 15px;
+}
+
+.category_dropdown{
+    width: 50px;
+    background: none;
+}
+
+.category_dropdown select{
+    display: 'All';
 }

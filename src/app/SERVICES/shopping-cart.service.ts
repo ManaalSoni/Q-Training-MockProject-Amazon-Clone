@@ -24,7 +24,7 @@ export class ShoppingCartService {
 
   get_shopping_cart_items=()=>{
     let items = localStorage.getItem('shopping_cart')
-    return items !== null ? JSON.parse(items) : console.log(items)
+    return items !== null ? JSON.parse(items) : console.log()
   }
   getCartLength =()=>{
     let items = this.get_shopping_cart_items();

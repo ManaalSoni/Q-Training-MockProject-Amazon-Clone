@@ -14,7 +14,6 @@ import { SignupService } from '../../SERVICES/signup.service';
 })
 export class SignupComponent implements OnInit {
 
-  data: any[] = []
   constructor(private fb: FormBuilder, private signupService: SignupService, private router: Router, private fireAuth: AngularFireAuth, private db: AngularFirestore) { }
 
   ngOnInit(): void {
@@ -99,7 +98,7 @@ export class SignupComponent implements OnInit {
         const result = await this.fireAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
         const email = result.user?.email;
         const snapshot = await this.db.collection("users").ref.where("email", "==", email).get();
-        console.log(snapshot);
+
         if (snapshot.empty) {
           var userType = []
           if (this.signupForm.value.customer) userType.push("customer");
@@ -120,12 +119,6 @@ export class SignupComponent implements OnInit {
             },
             error => console.log(error)
           );
-          
-          // const snap = await this.db.collection("users").get()
-          // snap.docs.map(doc => {
-          //   data.push(doc.data());
-          // });
-          // console.log(data);
         } else {
           console.log("Email is already in use");
 

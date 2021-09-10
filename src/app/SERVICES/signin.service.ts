@@ -12,4 +12,5 @@ export class SigninService {
   auth(data: any) {
     return this.http.post<any>(this.authURL, data);
   }
+  
 }

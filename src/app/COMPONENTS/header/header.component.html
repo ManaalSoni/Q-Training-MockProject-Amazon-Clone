@@ -1,11 +1,9 @@
 <div class="header">
     <nav class="header_top">
         <div class="header_menu">
-            <div class="header_menu_icon">
-                <mat-icon>menu</mat-icon>
-            </div>
-
-            <img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" class="header_menu_logo" alt="">
+            <!-- <a href="#"> -->
+                <img routerLink="/#" src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" class="header_menu_logo" alt="" >
+            <!-- </a> -->
 
             <div class="header_bottom_location_text">
                 <span class="header_left_line_one">Delivery to</span>
@@ -14,7 +12,9 @@
 
             <div class="header_menu_searchbar">
                 <div class="header_menu_category_list">
-                    <span>All</span>
+                    <select name="category" id="category" class="category_dropdown" >
+                        <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
+                    </select>
                 </div>
                 <input type="text" class="header_menu_input">
                 <div class="header_menu_searchbar_icon">
@@ -23,8 +23,11 @@
             </div>
 
             <div class="header_menu_singin">
-                <span class="header_menu_top_item">Hello, Sign in</span>
-                <span class="header_menu_bottom_item">Accounts & Lists</span>
+                <span class="header_menu_top_item">Hello, {{username}}</span>
+                <a href="/account" style="color: white;">
+                    <span class="header_menu_bottom_item">Account</span>
+                </a>
+                
             </div>
 
             <div class="header_menu_singin">
@@ -33,16 +36,28 @@
             </div>
 
             <div class="header_menu_cart">
+            <a href="/checkout" style="color: white;">
                 <mat-icon>shopping_cart</mat-icon>
+            </a>
+                    
+                
                 <p class="header_cart_number">{{shoppingCart.getCartLength()}}</p>
             </div>
 
         </div>
     </nav>
 
-    <nav class="header_bottom">
-        
-        <button>Add products</button>
-    </nav>
-
+    <div *ngIf="isSeller">
+        <nav class="header_bottom">
+            <div class="bottom_content">
+                <!-- <div class="header_menu_icon">
+                    <mat-icon>menu</mat-icon>
+                </div>
+                 -->
+                <a href="/addProduct" class="bottom_text">Add Products</a>
+                <a href="/addCoupon" class="bottom_text">Add Coupons</a>
+            </div>
+            
+        </nav>
+    </div>
 </div>

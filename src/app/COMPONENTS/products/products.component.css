@@ -25,3 +25,21 @@
     border: 1px solid;
     border-color: #a88134 #9c7e31 #846a29 ;
 }
+
+img{
+    height: 250px;
+}
+
+.carousel-caption{
+    color: black;
+    font-size: 20px;
+} 
+
+
+/* .rounded{
+    border-radius: 8px !important;
+    cursor: pointer;
+  }
+  .img-fluid{
+      width:100%;
+  } */

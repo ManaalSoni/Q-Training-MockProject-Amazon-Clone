@@ -38,7 +38,6 @@ export class ProductsService {
   }
 
   addReview(id: any, data: any){
-    console.log(id);
     this.http.post<any>(this.reviewsURL+id, data, this.options).subscribe(
       res => {
         if(res.success) this.setCurrentProduct(this.currentProduct);

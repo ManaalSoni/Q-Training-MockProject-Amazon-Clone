@@ -25,12 +25,12 @@ export class ProductDetailsComponent implements OnInit {
 
   closeModal(){
     this.dialogRef.close();
-    console.log(this.rate);
   }
 
   addReview(id:any){
     if(this.rate==0 || this.text.trim()==""){
       alert("Invalid");
+      return;
     }
     const newReview = {
       rating: this.rate,

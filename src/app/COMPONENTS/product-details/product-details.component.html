@@ -1,0 +1,35 @@
+<div class="product-details">
+    <div class="product">
+        <mat-card>
+            <div class="main">
+              <h4>{{item?.name}}</h4>
+              <p>{{item?.description}}</p>
+              
+              <img [src]="'http://localhost:3000/uploads/'+item.image">
+              <p>Rs<strong>{{item?.price}}</strong></p>
+            </div>
+        </mat-card>
+    </div>
+    <div class="review-container">
+        <h4>Reviews</h4>
+        <div class="reviews">
+            <div class="review" *ngFor="let review of item.reviews">
+                <mat-icon *ngFor="let i of [].constructor(review.rating)">star</mat-icon>
+                <h4><strong>{{review?.userFullName}}</strong></h4>
+                <p>{{review?.text}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="new-review">
+    <div><mat-icon 
+        *ngFor="let i of [].constructor(5); let idx = index"
+        (click)="rate = idx+1"
+        [ngClass]="{'active':idx<rate, 'inactive':idx>=rate}"
+    >
+        star
+    </mat-icon></div>
+    <input type="text" [(ngModel)]="text"/>
+    <button class="btn" type="submit" (click)="addReview(item?.id)">Add Review</button>
+</div>
+<button (click)="closeModal()">Close</button>

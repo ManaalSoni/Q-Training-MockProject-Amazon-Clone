@@ -4,11 +4,13 @@
 <div class="products">
     <div class="product" *ngFor="let item of products" >
         <mat-card>
-            <h4>{{item.name}}</h4>
-            <p>{{item.description}}</p>
-            
-            <img [src]="'http://localhost:3000/uploads/'+item.image">
-            <p>Rs<strong>{{item.price}}</strong></p>
+            <div class="main" (click)="openProduct(item)">
+              <h4>{{item.name}}</h4>
+              <p>{{item.description}}</p>
+              
+              <img [src]="'http://localhost:3000/uploads/'+item.image">
+              <p>Rs<strong>{{item.price}}</strong></p>
+            </div>
             <button (click)="addToCart(item)" >Add to cart</button>
         </mat-card>
     </div>

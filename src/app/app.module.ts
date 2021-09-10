@@ -29,6 +29,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailsComponent } from './COMPONENTS/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     SignupComponent,
     SigninComponent,
     AddCouponComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatIconModule,
     MatFormFieldModule,
     MatCardModule,
+    MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

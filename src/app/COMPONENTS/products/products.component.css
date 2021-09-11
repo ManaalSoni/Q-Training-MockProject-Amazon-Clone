@@ -4,19 +4,25 @@
     justify-content: center;
 }
 
-.product > mat-card > img{
+.product > mat-card > .main > img{
     object-fit: contain;
     height: 150px;
 }
 
-.product > mat-card{
+.product > mat-card {
     display: flex;
     flex-direction: column;
-    min-height: 350px;
-    width: 300px;
-    margin: 20px;
+    min-height: 300px;
     align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+}
 
+.product > mat-card > .main{
+    display: flex;
+    width: 280px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .product > mat-card > button{

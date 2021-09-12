@@ -12,17 +12,7 @@ export class CheckoutComponent implements OnInit {
   constructor(public shopping_cart: ShoppingCartService) { }
 
   ngOnInit(): void {
-    this.getShoppingCart()
-  }
-
-
-  getShoppingCart(){
-   this.items =  this.shopping_cart.get_shopping_cart_items();
-  }
-
-  deleteEventHandler(p: any){
-    console.log("event handled")
-    this.getShoppingCart()
+    this.shopping_cart.fetchCart();
   }
 
 }

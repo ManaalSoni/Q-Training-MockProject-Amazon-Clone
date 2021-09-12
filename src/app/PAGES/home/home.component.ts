@@ -1,3 +1,4 @@
+import { ShoppingCartService } from 'src/app/SERVICES/shopping-cart.service';
 import { Component, OnInit } from '@angular/core';
 import { FeaturedProductsService } from 'src/app/SERVICES/featured-products.service'
 @Component({
@@ -9,13 +10,17 @@ export class HomeComponent implements OnInit {
 
   items: any[] =[];
   
-  constructor(private api:FeaturedProductsService) { }
+  constructor(
+    private featuredProdsService:FeaturedProductsService,
+    private cartService: ShoppingCartService
+  ) { }
 
   ngOnInit(): void {
-    this.api.getFeaturedProducts().subscribe(
+    this.featuredProdsService.getFeaturedProducts().subscribe(
       res => this.items = res.products,
       error => console.log(error)
     )
+    this.cartService.fetchCart()
   }
 
   // getProducts(){
@@ -25,7 +30,7 @@ export class HomeComponent implements OnInit {
   // }
 
   featuredProducts(){
-    console.log(this.api.getFeaturedProducts())
+    console.log(this.featuredProdsService.getFeaturedProducts())
   }
 
 

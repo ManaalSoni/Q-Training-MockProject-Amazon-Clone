@@ -31,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProductDetailsComponent } from './COMPONENTS/product-details/product-details.component';
+import { CheckoutItemComponent } from './COMPONENTS/checkout-item/checkout-item.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProductDetailsComponent } from './COMPONENTS/product-details/product-de
     SigninComponent,
     AddCouponComponent,
     AddProductComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CheckoutItemComponent
   ],
   imports: [
     BrowserModule,

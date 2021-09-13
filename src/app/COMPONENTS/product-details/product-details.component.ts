@@ -37,6 +37,8 @@ export class ProductDetailsComponent implements OnInit {
       text: this.text
     };
     this.productsService.addReview(id, newReview);
+    this.text=''
+    this.rate=0
   }
 
 }

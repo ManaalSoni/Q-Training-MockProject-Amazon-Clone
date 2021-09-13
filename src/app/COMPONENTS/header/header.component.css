@@ -66,6 +66,7 @@
     justify-content: space-around;
     align-items: center;
     color: rgb(60, 58, 58);
+    text-align: center;
 }
 
 .header_menu_logo{
@@ -87,6 +88,7 @@
 .header_menu_bottom_item{
     font-size: 13px;
     font-weight: 800;
+    cursor: pointer;
 }
 
 .header_menu_cart{
@@ -147,10 +149,8 @@ a{
 }
 
 .category_dropdown{
-    width: 50px;
+    width: 40px;
     background: none;
-}
-
-.category_dropdown select{
-    display: 'All';
+    border: none;
+    
 }

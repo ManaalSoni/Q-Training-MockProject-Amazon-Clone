@@ -1,6 +1,6 @@
 <div class="container">
     <img src="https://www.doorwaysva.org/wp-content/uploads/2020/08/amazon-logo-transparent.png" alt="amazon logo">
-    <form [formGroup]="addProductForm">
+    <form [formGroup]="addProductForm" #form>
         <div class="form-group">
 
             <div class="header">
@@ -41,7 +41,7 @@
 
             <div class="inputFields redBorder image">
                 <label for="image">Image</label>
-                <input type="file" class="form-control" id="image" name="image" (change)="onFileSelect($event)" required>
+                <input type="file" class="form-control" #takeImage id="image" name="image" (change)="onFileSelect($event)" required>
                 <small class="text-danger" [class.d-none]="image && (image.valid || image.untouched)">Image is
                     required</small>
             </div>

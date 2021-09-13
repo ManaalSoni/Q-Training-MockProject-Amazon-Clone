@@ -3,6 +3,10 @@ import { ShoppingCartService } from 'src/app/SERVICES/shopping-cart.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CategoriesService } from '../../SERVICES/categories.service';
+import { GetUserService } from 'src/app/SERVICES/get-user.service';
+import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AccountTypeModalComponent } from '../account-type-modal/account-type-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -11,33 +15,63 @@ import { CategoriesService } from '../../SERVICES/categories.service';
 })
 export class HeaderComponent implements OnInit {
 
-  data: any[] = [];
+  data = {
+    'userType':'',
+    'fullName':''
+  };
   isSeller = false;
   images: any;
   categories: any[] = [];
   username:any;
+  categoryId:any='';
 
-  constructor(private fireAuth: AngularFireAuth, public shoppingCart:ShoppingCartService, private db: AngularFirestore, private categoriesService: CategoriesService) { }
+
+  constructor(private fireAuth: AngularFireAuth, private router: Router,
+    public getUserService : GetUserService,public shoppingCart:ShoppingCartService,
+    public matDialog: MatDialog, private db: AngularFirestore, private categoriesService: CategoriesService) { }
 
   async ngOnInit() {
     const email = localStorage.getItem("email")
+    this.getUserService.getUserByEmail(email).subscribe(
+      res => {this.data = res.user
+        // console.log(this.data)
+      },
+      error => console.log(error)
 
-    const snapshot = await this.db.collection("users").ref.where("email", "==", email).get();
-    snapshot.docs.map((doc: any) => {
-      this.data.push(doc.data());
-    });
-    const userType = this.data[0].userType;
-    this.username = this.data[0].fullName.split(' ')[0];
+    )
+    
+    const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+      wait(1000).then(() => {
+    const userType = this.data.userType;
+    this.username = this.data.fullName.split(' ')[0];
     this.isSeller = userType.includes('seller')
-
+      
     this.categoriesService.getAllCategories().subscribe(
       res => {this.categories = res.categories
         // console.log(this.categories)
       },
       error => console.log(error)
     );
-    
-  }
+    // this.categoryProducts.getCategoryProducts(this.categoryId)
+  });
+}
 
-  
+  onChange(deviceValue:any) {
+    localStorage.setItem('categoryId', deviceValue)
+    window.location.reload()
+}
+
+openModal(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.id = "modal-component";
+  dialogConfig.height = "fit-content";
+  dialogConfig.width = "30vw";
+  const modalDialog = this.matDialog.open(AccountTypeModalComponent, dialogConfig);
+}
+
+goToHome(){
+  localStorage.setItem("categoryId",'All');
+  this.router.navigate(["/"])
+}
+
 }

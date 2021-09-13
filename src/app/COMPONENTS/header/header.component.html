@@ -2,7 +2,7 @@
     <nav class="header_top">
         <div class="header_menu">
             <!-- <a href="#"> -->
-                <img routerLink="/#" src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" class="header_menu_logo" alt="" >
+                <img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" class="header_menu_logo" alt="" (click)="goToHome()">
             <!-- </a> -->
 
             <div class="header_bottom_location_text">
@@ -12,8 +12,10 @@
 
             <div class="header_menu_searchbar">
                 <div class="header_menu_category_list">
-                    <select name="category" id="category" class="category_dropdown" >
+                    <select name="category" id="category" class="category_dropdown" [(ngModel)]="categoryId" (ngModelChange)="onChange($event)">
+                        <option id="all_categories" selected>All</option>
                         <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
+                        
                     </select>
                 </div>
                 <input type="text" class="header_menu_input">
@@ -24,9 +26,8 @@
 
             <div class="header_menu_singin">
                 <span class="header_menu_top_item">Hello, {{username}}</span>
-                <a href="/account" style="color: white;">
-                    <span class="header_menu_bottom_item">Account</span>
-                </a>
+                
+                    <span (click)="openModal()" class="header_menu_bottom_item">Account</span>
                 
             </div>
 

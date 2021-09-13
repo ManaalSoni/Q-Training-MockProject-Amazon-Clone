@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriesService } from '../../SERVICES/categories.service';
@@ -9,10 +9,13 @@ import { ProductsService } from '../../SERVICES/products.service';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
 
+export class AddProductComponent implements OnInit {
+  
+  
   constructor(private fb: FormBuilder, private productsService: ProductsService, private router: Router, private categoriesService: CategoriesService) { }
 
+  
   ngOnInit(): void {
     this.categoriesService.getAllCategories().subscribe(
       res => this.categories = res.categories,
@@ -79,6 +82,8 @@ export class AddProductComponent implements OnInit {
         res => {
           console.log(res);
           this.addProductForm.reset();
+          
+
         },
         error => console.log(error)
       );
@@ -90,4 +95,6 @@ export class AddProductComponent implements OnInit {
   navigate() {
     this.router.navigate(["/home"]);
   }
+
+  
 }

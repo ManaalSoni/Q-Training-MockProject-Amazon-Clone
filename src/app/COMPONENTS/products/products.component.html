@@ -1,35 +1,44 @@
-<hr>
-<h1 style="text-align: center;">Featured Products</h1>
-<hr>
-<div class="products">
+<div class="products" *ngIf="categoryId!=='All'">
     <div class="product" *ngFor="let item of products" >
         <mat-card>
             <div class="main" (click)="openProduct(item)">
-              <h4>{{item.name}}</h4>
+              <h2>{{item.name}}</h2>
               <p>{{item.description}}</p>
               
               <img [src]="'http://localhost:3000/uploads/'+item.image">
-              <p>Rs<strong>{{item.price}}</strong></p>
+              <p><strong>Rs. {{item.price}}</strong></p>
             </div>
             <button (click)="addToCart(item)" >Add to cart</button>
         </mat-card>
     </div>
-</div>
-
-<!-- <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
-              [animation]="'slide'">
-  <mdb-carousel-item *ngFor="let item of products; let i = index">
-    <div class="col-md-4" *ngFor="let item of products; let cardIndex = index">
-      <mdb-card class="my-1">
-        <mdb-card-img [src]="item.image" alt="Card image cap" class="img-fluid rounded"></mdb-card-img>
-        <mdb-card-body>
-          <mdb-card-title>
-            <h4>{{item.title}}</h4>
-          </mdb-card-title>
-          <p>{{item.price}}</p>
-          <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Add to Cart</a>
-        </mdb-card-body>
-      </mdb-card>
+</div> 
+<div *ngIf="categoryId==='All'">
+  <hr>
+  <h1 style="text-align: center;">Featured Products</h1>
+  <hr>
+  <section class="policy-product">
+    <div class="containers">
+      <div class="bg-position" style="padding: 70px;">
+        <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide *ngFor="let item of products let i = index" >
+            <div class="policy-p-card" >
+              <div >
+                <div class="date">
+                  <h3>16</h3>
+                  <h4>Sept</h4>
+                </div>
+                <div class="policy-image">
+                  <img [src]="'http://localhost:3000/uploads/'+item.image" alt="Product Image">
+                </div>
+                <h2 (click)="openProduct(item)">{{item.name}}</h2>
+                <h3>Rs. {{item.price}}</h3>
+                <p>{{item.description}}</p>
+                <button (click)="addToCart(item)">Add to cart</button>
+              </div>
+            </div>
+          </ng-template>
+      </owl-carousel-o>
+      </div>
     </div>
-  </mdb-carousel-item>
-</mdb-carousel> -->
+  </section>
+</div>

@@ -4,10 +4,11 @@
     right: 15px;
     opacity: 0;
     transition: all .2s ease-in-out;
-    background-color: #232f3e; ;
+    background-color: #1b2430; ;
     text-align: center;
     font-size: large;
     width: 100%;
+    
    }
    .show-scrollTop {
     opacity: 1;
@@ -17,4 +18,52 @@
    button{
        color: white;
    }
+
+.footer_class{
+    height: 350px;
+    background-color: #232f3e;
+}
+
+.policy{
+    height:300px ;
+    padding: 60px 0;
+}
+
+.policy-card h2{
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 12px 0 5px;
+    color: white;
+}
+
+.round{
+    padding: 23px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 34px;
+    background-color: rgba(17, 16, 16, 0.363);
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    position: relative;
+}
+
+.round-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.policy-card p{
+    font-style: italic;
+    color: white;
+}
+
+.policy-card:hover .round{
+    background-color: #f0c14b;
+}
 

@@ -1,5 +1,5 @@
 <div class="checkout_products">
-    <p class="price">Price</p>
+    <h3 class="price"><strong>Price</strong></h3>
     <div class="checkout_product" *ngFor="let p of checkout_products">
        <img [src]="'http://localhost:3000/uploads/'+p.image" alt="" class="checkout_product_img">
        <div class="checkout_product_info">
@@ -30,13 +30,13 @@
           
        </div>
        <div class="checkout_products_price">
-           <p> <strong>${{p.price}}</strong> </p>
+           <p> <strong>Rs. {{p.price}}</strong> </p>
        </div>
 
     </div>
     <div class="checkout_products_subtotal">
         <p>Subtotal ({{shopping_cart_service.getCartLength()}} items):
-             <strong>${{shopping_cart_service.getTotal()}}</strong> </p>
+             <strong>Rs. {{shopping_cart_service.getTotal()}}</strong> </p>
 
     </div>
 </div>

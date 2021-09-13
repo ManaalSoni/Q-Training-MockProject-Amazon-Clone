@@ -30,6 +30,8 @@ export class ProductsComponent implements OnInit {
   ) 
   {}
 
+  name = localStorage.getItem("categoryName")!=="undefined" ? localStorage.getItem("categoryName") : "Featured Products"
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,

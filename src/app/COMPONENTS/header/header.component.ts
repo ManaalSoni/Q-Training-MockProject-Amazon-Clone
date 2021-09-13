@@ -57,7 +57,12 @@ export class HeaderComponent implements OnInit {
 }
 
   onChange(deviceValue:any) {
-    localStorage.setItem('categoryId', deviceValue)
+
+    console.log(deviceValue);
+    const id = deviceValue.split("@")[0];
+    const name = deviceValue.split("@")[1]
+    localStorage.setItem('categoryId', id)
+    localStorage.setItem('categoryName', name)
     window.location.reload()
 }
 
@@ -72,6 +77,13 @@ openModal(){
 goToHome(){
   localStorage.setItem("categoryId",'All');
   this.router.navigate(["/"])
+}
+
+getName(name: any) {
+  console.log("clicked");
+  
+  console.log(name);
+  
 }
 
 }

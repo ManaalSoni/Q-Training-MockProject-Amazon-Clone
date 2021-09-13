@@ -1,9 +1,13 @@
 <div class="subtotal" *ngIf="shoppingCart.getCartLength() > 0">
-    <p>Subtotal: ({{shoppingCart.getCartLength()}} items) 
-        <strong>Rs. {{shoppingCart.getTotal()}}</strong></p>
-        <div class="subtotal_gift">
-            <input type="checkbox"/>
-           <p>This order contains a gift</p> 
-        </div>
-        <button>Proceed to checkout</button>
+    <div>
+        <p><strong>Available Coupons</strong></p>
+    </div>
+
+    <div class="allCoupons" *ngFor="let coupon of coupons">
+        <input [disabled]="couponApplied" [(ngModel)]="discount_rate" type="radio" name="coupons" value="{{coupon.discount_rate}}">
+        <label>{{coupon.code}}</label><br>
+        <p>{{coupon.description}}</p>
+    </div>
+    <button *ngIf="!couponApplied" (click)="applyCoupon()">Apply Coupon</button>
+    <button *ngIf="couponApplied" (click)="reset()">Reset</button>
 </div>

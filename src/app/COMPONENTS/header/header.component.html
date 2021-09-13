@@ -12,9 +12,9 @@
 
             <div class="header_menu_searchbar">
                 <div class="header_menu_category_list">
-                    <select name="category" id="category" class="category_dropdown" [(ngModel)]="categoryId" (ngModelChange)="onChange($event)">
-                        <option id="all_categories" selected>All</option>
-                        <option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</option>
+                    <select #category name="category" id="category" class="category_dropdown" [(ngModel)]="categoryId" (ngModelChange)="onChange($event)">
+                        <option id="all_categories" value="All" selected>All</option>
+                        <option *ngFor="let c of categories" value="{{c.id}}@{{c.name}}" (click)="getName(c.name)">{{c.name}}</option>
                         
                     </select>
                 </div>
@@ -56,7 +56,6 @@
                 </div>
                  -->
                 <a href="/addProduct" class="bottom_text">Add Products</a>
-                <a href="/addCoupon" class="bottom_text">Add Coupons</a>
             </div>
             
         </nav>

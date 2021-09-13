@@ -15,7 +15,7 @@ export class ShoppingCartService {
   options = {headers: this.headers};
 
   constructor(private http: HttpClient) { }
-
+  total = 0;
 
   addToCart = (product: any) => {
     const newCartItem = {
@@ -41,7 +41,10 @@ export class ShoppingCartService {
 
   fetchCart(){
     this.getCart().subscribe(
-      res => this.items = res.cart,
+      res =>  {
+        this.items = res.cart;
+        this.calculateTotal();
+      },
       error => console.log(error)
     )
   }
@@ -53,8 +56,8 @@ export class ShoppingCartService {
     return this.items.length;
 
   }
-  getTotal = ()=>{
-    return this.items.reduce((acc: any, item: { price: number; quantity: number; })=> acc+ (item.price * item.quantity), 0)
+  calculateTotal = ()=>{
+    this.total =  this.items.reduce((acc: any, item: { price: number; quantity: number; })=> acc+ (item.price * item.quantity), 0)
   }
 
   removeItem=(p: { productId: any; })=>{
@@ -64,6 +67,7 @@ export class ShoppingCartService {
           const index = this.items.findIndex((item: { productId: any; })=> item.productId == p.productId);
           if(index>=0){
             this.items.splice(index, 1);
+            this.calculateTotal();
           }
         }
       }
@@ -78,9 +82,14 @@ export class ShoppingCartService {
       res => {
         if(res.success){
           p.quantity = quantity;
+          this.calculateTotal();
         }
       },
       error => console.log(error)
     )
+  }
+
+  applyCoupon = (discount_rate: any) => {
+    this.total -= this.total * discount_rate / 100;
   }
 }

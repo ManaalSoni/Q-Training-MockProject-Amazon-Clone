@@ -9,6 +9,7 @@ export class CouponsService {
   constructor(private http: HttpClient) { }
 
   addCouponURL = "http://localhost:3000/api/v1/coupons";
+  getAllCouponsURL = "http://localhost:3000/api/v1/coupons/all";
 
   headers = new HttpHeaders({
     "Authorization": "Bearer " + localStorage.getItem("token")
@@ -19,4 +20,7 @@ export class CouponsService {
     return this.http.post<any>(this.addCouponURL, data, this.options);
   }
 
+  getAllCoupons() {
+    return this.http.get<any>(this.getAllCouponsURL, this.options);
+  }
 }

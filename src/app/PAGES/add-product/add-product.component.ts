@@ -82,7 +82,7 @@ export class AddProductComponent implements OnInit {
         res => {
           console.log(res);
           this.addProductForm.reset();
-          
+          window.location.reload();
 
         },
         error => console.log(error)

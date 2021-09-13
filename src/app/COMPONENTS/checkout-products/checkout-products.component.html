@@ -3,6 +3,6 @@
     <app-checkout-item *ngFor="let p of checkout_products" [p]="p"></app-checkout-item>
     <div class="checkout_products_subtotal">
         <p>Subtotal ({{cartService.getCartLength()}} items):
-             <strong>${{cartService.getTotal()}}</strong> </p>
+             <strong>${{cartService.total}}</strong> </p>
     </div>
 </div>

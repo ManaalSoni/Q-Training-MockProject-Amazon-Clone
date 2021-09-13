@@ -4,14 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "AIzaSyDBPgS8BhsfcQ3rxgG_gXHDhX-e0MWwhMQ",
-    authDomain: "clone-349c3.firebaseapp.com",
-    projectId: "clone-349c3",
-    storageBucket: "clone-349c3.appspot.com",
-    messagingSenderId: "47002948305",
-    appId: "1:47002948305:web:e6100fe498aaffba8fabf0"
-  }
+
 };
 
 /*

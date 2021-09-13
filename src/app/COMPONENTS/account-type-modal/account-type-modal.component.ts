@@ -44,8 +44,8 @@ export class AccountTypeModalComponent implements OnInit {
         console.log("Logout successful");
         localStorage.removeItem("token");
         localStorage.removeItem("email");
-        localStorage.removeItem("shopping_cart");
         localStorage.removeItem("categoryId");
+        localStorage.removeItem("categoryName")
         this.router.navigate(['/signin']);
       })
     } catch (error) {

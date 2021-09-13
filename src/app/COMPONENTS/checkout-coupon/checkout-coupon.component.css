@@ -44,3 +44,24 @@
     border-color: #a88134 #9c7e31 #846a29;
 }
 
+.coupon_label{
+    font-weight: 500;
+    margin-left: 15px;
+    font-size: medium;
+    text-transform: uppercase;
+}
+
+.allCoupons p{
+    font-style:italic ;
+    margin-left: 20px;
+}
+
+.radio_btn{
+    /* position: absolute;
+  top: 0;
+  left: 0;*/
+  height: 20px;
+  width: 20px; 
+  background-color: lightgray;
+  border-radius: 30%;
+}

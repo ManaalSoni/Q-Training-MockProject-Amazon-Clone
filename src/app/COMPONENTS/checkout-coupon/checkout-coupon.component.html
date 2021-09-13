@@ -4,8 +4,8 @@
     </div>
 
     <div class="allCoupons" *ngFor="let coupon of coupons">
-        <input [disabled]="couponApplied" [(ngModel)]="discount_rate" type="radio" name="coupons" value="{{coupon.discount_rate}}">
-        <label>{{coupon.code}}</label><br>
+        <input [disabled]="couponApplied" [(ngModel)]="discount_rate" type="radio" name="coupons" value="{{coupon.discount_rate}}" class="radio_btn">
+        <label class="coupon_label">{{coupon.code}}</label><br>
         <p>{{coupon.description}}</p>
     </div>
     <button *ngIf="!couponApplied" (click)="applyCoupon()">Apply Coupon</button>

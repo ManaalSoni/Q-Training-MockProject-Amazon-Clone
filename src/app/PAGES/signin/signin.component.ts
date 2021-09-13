@@ -51,7 +51,8 @@ export class SigninComponent implements OnInit {
             res => {
               localStorage.setItem("token", res.token);
               localStorage.setItem("email", email);
-              localStorage.setItem("categoryId",'All')
+              localStorage.setItem("categoryId",'All');
+              localStorage.setItem("categoryName",'undefined')
               console.log("Signin with Email-Password successful");
               this.router.navigate(['/']);
             },
@@ -86,7 +87,8 @@ export class SigninComponent implements OnInit {
             res => {
               localStorage.setItem("token", res.token);
               localStorage.setItem("email", email)
-              localStorage.setItem("categoryId",'All')
+              localStorage.setItem("categoryId",'All');
+              localStorage.setItem("categoryName",'undefined')
               console.log("Signin with Google successful");
               this.router.navigate(['/']);
             },

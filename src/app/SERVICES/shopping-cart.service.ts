@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,47 +6,81 @@ import { Injectable } from '@angular/core';
 })
 export class ShoppingCartService {
 
-  shopping_cart_items: any[] = [];
+  cartURL = "http://localhost:3000/api/v1/users/cart";
+  items: any[] = [];
 
-  constructor() { }
+  headers = new HttpHeaders({
+    "Authorization": "Bearer " + localStorage.getItem("token")
+  });
+  options = {headers: this.headers};
 
-  addProduct = (product: any) => {
-    let items = this.get_shopping_cart_items()
-    if(items){
-      items.push(product)
-      localStorage.setItem('shopping_cart', JSON.stringify(items))
+  constructor(private http: HttpClient) { }
 
-    }
-    else{
-      this.shopping_cart_items.push(product);
-      localStorage.setItem('shopping_cart', JSON.stringify(this.shopping_cart_items))
-    }
+
+  addToCart = (product: any) => {
+    const newCartItem = {
+      name: product.name,
+      productId: product.id,
+      price: product.price,
+      image: product.image,
+      quantity: 1
+    };
+    this.http.post<any>(this.cartURL, newCartItem, this.options).subscribe(
+      res => {
+        if(res.success){
+          this.fetchCart();
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
+  getCart = () => {
+    return this.http.get<any>(this.cartURL, this.options);
+  }
+
+  fetchCart(){
+    this.getCart().subscribe(
+      res => this.items = res.cart,
+      error => console.log(error)
+    )
   }
 
   get_shopping_cart_items=()=>{
-    let items = localStorage.getItem('shopping_cart')
-    return items !== null ? JSON.parse(items) : console.log()
+    return this.items;
   }
   getCartLength =()=>{
-    let items = this.get_shopping_cart_items();
-    return items? this.get_shopping_cart_items().length: 0
+    return this.items.length;
 
   }
   getTotal = ()=>{
-    let items = this.get_shopping_cart_items();
-    return items?.reduce((acc: any, item: { price: any; })=> acc+ item.price, 0)
-
+    return this.items.reduce((acc: any, item: { price: number; quantity: number; })=> acc+ (item.price * item.quantity), 0)
   }
-  removerItem=(p: { id: any; })=>{
-    console.log('calling remover ', p)
-    let items = this.get_shopping_cart_items();
-    
-    const index = items.findIndex((item: { id: any; })=> item.id == p.id);
-    if(index>=0){
-      console.log('hitting if')
-      items.splice(index, 1);
-      return localStorage.setItem('shopping_cart', JSON.stringify(items))
-    }
 
+  removeItem=(p: { productId: any; })=>{
+    this.http.delete<any>(this.cartURL+"/"+p.productId, this.options).subscribe(
+      res => {
+        if(res.success){
+          const index = this.items.findIndex((item: { productId: any; })=> item.productId == p.productId);
+          if(index>=0){
+            this.items.splice(index, 1);
+          }
+        }
+      }
+    );
+  }
+
+  updateQuantity=(p:{productId: String; quantity: number}, quantity: number) => {
+    const reqBody = {
+      quantity
+    };
+    this.http.put<any>(this.cartURL+"/"+p.productId, reqBody, this.options).subscribe(
+      res => {
+        if(res.success){
+          p.quantity = quantity;
+        }
+      },
+      error => console.log(error)
+    )
   }
 }

@@ -9,7 +9,7 @@
         </div>
         <div class="checkout_not_empty" *ngIf="shopping_cart.getCartLength() != 0">
             <h1><strong>Shopping Cart</strong></h1>
-            <app-checkout-products [checkout_products] = "items" (deleteEvent)="deleteEventHandler($event)"></app-checkout-products>
+            <app-checkout-products></app-checkout-products>
         </div>
 
     </div>

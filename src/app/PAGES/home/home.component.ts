@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeaturedProductsService } from 'src/app/SERVICES/featured-products.service'
 import { CategoryProductsService } from './../../SERVICES/category-products.service';
+import { ShoppingCartService } from 'src/app/SERVICES/shopping-cart.service';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,19 @@ export class HomeComponent implements OnInit {
 
   items: any[] =[];
   
-  constructor(private api:FeaturedProductsService,
-    private categoryService:CategoryProductsService) { }
+
+  constructor(
+      private featuredProdsService:FeaturedProductsService,
+      private categoryService:CategoryProductsService,
+      private cartService: ShoppingCartService
+  ) { }
 
   ngOnInit(): void {
     // this.api.getFeaturedProducts().subscribe(
     //   res => this.items = res.products,
     //   error => console.log(error)
     // )
+    
     if(localStorage.getItem('categoryId')!='All'){
       this.categoryService.getCategoryProducts(localStorage.getItem('categoryId')).subscribe(
         res => this.items = res.products,
@@ -26,12 +32,13 @@ export class HomeComponent implements OnInit {
       )
     }
     else{
-      this.api.getFeaturedProducts().subscribe(
+      this.featuredProdsService.getFeaturedProducts().subscribe(
         res => this.items = res.products,
         error => console.log(error)
       )
     }
-
+    
+    this.cartService.fetchCart()
   }
 
   // getProducts(){
@@ -41,7 +48,7 @@ export class HomeComponent implements OnInit {
   // }
 
   featuredProducts(){
-    console.log(this.api.getFeaturedProducts())
+    console.log(this.featuredProdsService.getFeaturedProducts())
   }
 
 

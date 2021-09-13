@@ -8,19 +8,12 @@ import { ShoppingCartService } from 'src/app/SERVICES/shopping-cart.service';
 })
 export class CheckoutProductsComponent implements OnInit {
 
-  @Input()
   checkout_products: any[] = [];
-  @Output() deleteEvent: EventEmitter<any> = new EventEmitter()
 
-  constructor(public shopping_cart_service: ShoppingCartService) { }
+  constructor(public cartService: ShoppingCartService) { }
 
   ngOnInit(): void {
-    console.log('products ', this.checkout_products)
-  }
-
-  removeItem(p: { id: any; }){
-    this.shopping_cart_service.removerItem(p)
-    this.deleteEvent.emit(p)
+    this.checkout_products = this.cartService.get_shopping_cart_items();
   }
 
 }
